@@ -4,7 +4,7 @@ CS:GO Game State Integration (GSI) Parser Library
 Tato knihovna poskytuje parser pro CS:GO GSI JSON data a strukturované datové třídy.
 """
 
-from GameStateData import (
+from .GameStateData import (
     GameState,
     Player,
     PlayerData,
@@ -18,8 +18,8 @@ from GameStateData import (
     ProviderInfo
 )
 
-from JSONparser import PayloadParser
-from GSIReader import GSIListener
+from .JSONparser import PayloadParser
+from .GSIReader import GSIListener
 
 __all__ = [
     'GameState',

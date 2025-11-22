@@ -1,6 +1,6 @@
 from aiohttp import web
 from threading import Thread
-import JSONparser as jp
+from . import JSONparser as jp
 
 class GSIListener:
     def __init__(self, host, port, token=None):

@@ -1,4 +1,4 @@
-import GameStateData as gsd
+from . import GameStateData as gsd
 
 class PayloadParser:
     def parseData(self, data: dict):
