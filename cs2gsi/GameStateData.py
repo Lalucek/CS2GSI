@@ -1,6 +1,7 @@
 class GameState:
     def __init__(self):
         self.player = Player()
+        self.allplayers = {}
         self.match_info = MatchInfo()
         self.team_info = TeamInfo()
         self.phase_info = PhaseInfo()
