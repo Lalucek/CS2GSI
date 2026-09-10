@@ -1,3 +1,7 @@
+from dataclasses import dataclass
+
+
+@dataclass
 class GameState:
     def __init__(self):
         self.player = Player()
@@ -8,7 +12,7 @@ class GameState:
         self.bomb_info = BombInfo()
         self.round_info = RoundInfo()
         self.provider_info = ProviderInfo()
-
+@dataclass
 class Player:
     def __init__(self):
         self.steamid = None
@@ -20,6 +24,7 @@ class Player:
         self.playerData = PlayerData()
         self.playerWeapons = PlayerWeapons()
         self.playerStats = PlayerStats()
+@dataclass
 class PlayerData:
     def __init__(self):
         self.health = None
@@ -32,6 +37,7 @@ class PlayerData:
         self.round_kills = None
         self.round_killhs = None
         self.equip_value = None
+@dataclass
 class PlayerStats:
     def __init__(self):
         self.kills = None
@@ -39,8 +45,10 @@ class PlayerStats:
         self.assists = None
         self.mvps = None
         self.score = None
+@dataclass
 class PlayerWeapons:
     def __init__(self):
+        self.raw_weapons = {}
         self.weapon_knife = {
             "name": None,
             "paintkit": None,
@@ -93,6 +101,7 @@ class PlayerWeapons:
             "state": None,
             "ammo_reserve": None
         }
+@dataclass
 class MatchInfo:
     def __init__(self):
         self.mode = None
@@ -100,6 +109,7 @@ class MatchInfo:
         self.phase = None
         self.round = None
         self.num_matches_to_win_series = None
+@dataclass
 class TeamInfo:
     def __init__(self):
         self.team_t = {
@@ -114,13 +124,13 @@ class TeamInfo:
             "timeouts_remaining": None,
             "matches_won_this_series": None
         }
-
+@dataclass
 class PhaseInfo:
     def __init__(self):
         self.phase = None
         self.phase_ends_in = None
         self.previous_ends_in = None
-
+@dataclass
 class BombInfo:
     def __init__(self):
         self.state = None
@@ -129,13 +139,14 @@ class BombInfo:
         self.player = None
     def getStateAndPlayer(self):
         return self.state, self.player
+@dataclass
 class RoundInfo:
     def __init__(self):
         self.phase = None
         self.win_team = None
         self.bomb = None
         self.roundHistory = {}
-
+@dataclass
 class ProviderInfo:
     def __init__(self):
         self.name = None

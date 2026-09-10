@@ -1,7 +1,7 @@
 from . import GameStateData as gsd
 
 class PayloadParser:
-    def parseData(self, data: dict):
+    def parseData(self, data: dict) -> gsd.GameState:
         gameState = gsd.GameState()
         
         # Provider Info
@@ -75,7 +75,7 @@ class PayloadParser:
         
         return gameState
 
-    def _parse_player_data(self, player_data, player_obj):
+    def _parse_player_data(self, player_data, player_obj) -> None:
         # Basic player info
         if player_obj.steamid is None:
             player_obj.steamid = player_data.get('steamid')
@@ -112,6 +112,7 @@ class PayloadParser:
         # Player weapons
         if 'weapons' in player_data:
             weapons = player_data['weapons']
+            player_obj.playerWeapons.raw_weapons = weapons
             grenade_index = 1
             
             for weapon_key, weapon_data in weapons.items():
