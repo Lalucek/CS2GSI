@@ -1,41 +1,69 @@
-"""
-CS:GO Game State Integration (GSI) Parser Library
-
-Tato knihovna poskytuje parser pro CS:GO GSI JSON data a strukturované datové třídy.
-"""
-
-from .GameStateData import (
-    GameState,
-    Player,
-    PlayerData,
-    PlayerStats,
-    PlayerWeapons,
-    MatchInfo,
-    TeamInfo,
-    PhaseInfo,
-    BombInfo,
-    RoundInfo,
-    ProviderInfo
+from .enums import (
+    BombState,
+    CountdownPhase,
+    MapPhase,
+    PlayerActivity,
+    RoundBombState,
+    RoundPhase,
+    Team,
+    WeaponState,
+    WeaponType,
 )
-
-from .JSONparser import PayloadParser
-from .GSIReader import GSIListener
+from .exceptions import CS2GSIError, PayloadError
+from .models import (
+    BombInfo,
+    GameState,
+    MapInfo,
+    MatchStats,
+    PhaseCountdowns,
+    Player,
+    PlayerState,
+    PlayerWeapons,
+    ProviderInfo,
+    RoundInfo,
+    RoundWin,
+    TeamStats,
+    ThrownGrenade,
+    Vector3,
+    Weapon,
+)
+from .parser import GameStateParser
+from .server import GameStateCallback, GSIServer
 
 __all__ = [
-    'GameState',
-    'Player',
-    'PlayerData',
-    'PlayerStats',
-    'PlayerWeapons',
-    'MatchInfo',
-    'TeamInfo',
-    'PhaseInfo',
-    'BombInfo',
-    'RoundInfo',
-    'ProviderInfo',
-    'PayloadParser',
-    'GSIListener'
+    # models
+    "BombInfo",
+    # enums
+    "BombState",
+    # exceptions
+    "CS2GSIError",
+    "CountdownPhase",
+    # server & parser
+    "GSIServer",
+    "GameState",
+    "GameStateCallback",
+    "GameStateParser",
+    "MapInfo",
+    "MapPhase",
+    "MatchStats",
+    "PayloadError",
+    "PhaseCountdowns",
+    "Player",
+    "PlayerActivity",
+    "PlayerState",
+    "PlayerWeapons",
+    "ProviderInfo",
+    "RoundBombState",
+    "RoundInfo",
+    "RoundPhase",
+    "RoundWin",
+    "Team",
+    "TeamStats",
+    "ThrownGrenade",
+    "Vector3",
+    "Weapon",
+    "WeaponState",
+    "WeaponType",
 ]
 
-__version__ = '1.0.1'
-
+__version__ = "2.0.0"

@@ -1,39 +1,27 @@
-import sys
-import os
+from __future__ import annotations
+
 import json
-from aiohttp import web
+import sys
+from pathlib import Path
 
-# Add parent directory to path to import cs2gsi
-sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from cs2gsi.GSIReader import GSIListener
+from cs2gsi import GameState, GSIServer  # noqa: E402
 
 
-class WeaponInfoListener(GSIListener):
-    async def handle_data(self, request):
-        try:
-            data = await request.json()
+def print_raw_weapons(state: GameState) -> None:
+    player = state.raw.get("player")
+    weapons = player.get("weapons") if isinstance(player, dict) else None
+    if weapons:
+        print(json.dumps(weapons))
 
-            # Parse using the library
-            self.gs_object = self.parser.parseData(data)
 
-            # Print raw weapons data
-            if (
-                self.gs_object
-                and self.gs_object.player
-                and self.gs_object.player.playerWeapons
-            ):
-                raw_weapons = self.gs_object.player.playerWeapons.raw_weapons
-                if raw_weapons:
-                    print(json.dumps(raw_weapons))
-
-            return web.Response(text="Payload received", status=200)
-        except Exception as e:
-            print(f"Error: {e}")
-            return web.Response(text="Server error: " + str(e), status=500)
+def main() -> None:
+    server = GSIServer("127.0.0.1", 8004)
+    server.subscribe(print_raw_weapons)
+    print(f"Starting GSI server for weapon info on {server.host}:{server.port}...")
+    server.run()
 
 
 if __name__ == "__main__":
-    print("Starting GSI server for weapon info on 127.0.0.1:8004...")
-    listener = WeaponInfoListener("127.0.0.1", 8004)
-    listener.start()
+    main()
